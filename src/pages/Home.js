@@ -14,6 +14,7 @@ import React, {
 } from 'react-native';
 
 import Counter1 from './Counter1'
+import TodoList from './TodoList'
 
 export default class extends Component {
 
@@ -25,12 +26,20 @@ export default class extends Component {
         </Text>
         <TouchableOpacity onPress={()=>{
           this.props.navigator.push({
-            name: 'Counter1',
+            name: 'Counter I',
             component: Counter1,
             passProps: { message: 'Hello World' }
            })
         }}>
           <Text style={styles.textNormal}>{'<'}Forward{'>'} to Counter1</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={()=>{
+          this.props.navigator.push({
+            name: 'todoList',
+            component: Todo List
+           })
+        }}>
+          <Text style={styles.textNormal}>{'<'}Forward{'>'} to Todos</Text>
         </TouchableOpacity>
       </View>
     );

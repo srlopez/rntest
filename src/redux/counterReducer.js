@@ -5,8 +5,7 @@
  */
 
 'use strict';
-//import { INCREMENT, DECREMENT } from './counterActions'
-import { actionsTypes as a } from './counterActions'
+import { actionsTypes as aT } from './counterActions'
 
 //Redux Initial State
 const initialState = {
@@ -14,15 +13,15 @@ const initialState = {
 }
 
 //Reducer
-const counter = (state = initialState, action = {}) => {
+const counterReducer = (state = initialState, action = {}) => {
   let delta = 1
   switch (action.type) {
-  case a.DECREMENT: delta = -1;
-  case a.INCREMENT:
+  case aT.DECREMENT: delta = -1;
+  case aT.INCREMENT:
     return Object.assign({}, state, { counter: state.counter+delta })
   default:
     return state
   }
 }
 
-export default counter
+export default counterReducer
