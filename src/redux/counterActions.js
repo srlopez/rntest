@@ -13,8 +13,12 @@ export const actionsTypes = {
 
 //Actions creators
 export const actionsCreators = {
-  increment: () => ({ type: actionsTypes.INCREMENT }),
-  decrement: () => ({ type: actionsTypes.DECREMENT })
+  increment: () => ({
+    type: actionsTypes.INCREMENT
+  }),
+  decrement: () => ({
+    type: actionsTypes.DECREMENT
+  })
 }
 
 // export const INCREMENT = 'INCREMENT'

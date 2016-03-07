@@ -14,16 +14,25 @@ import React, {
 } from 'react-native';
 
 import Counter1 from './Counter1'
-import TodoList from './TodoList'
+import ToDoList from './ToDoList'
 
 export default class extends Component {
+  componentDidMount() {
+    this.props.dataActions.fetchData();
+  }
 
   render() {
+    const { isFetching, message } = this.props.dataState;
+
     return (
       <View style={styles.container}>
         <Text style={styles.textSuper}>
           Home
         </Text>
+        <Text>{isFetching ? "Data" : 'Data loaded'}</Text>
+        <Text>{isFetching ? "Loading..." : this.props.message}</Text>
+        <Text>{"\n\n"}</Text>
+
         <TouchableOpacity onPress={()=>{
           this.props.navigator.push({
             name: 'Counter I',
@@ -35,8 +44,8 @@ export default class extends Component {
         </TouchableOpacity>
         <TouchableOpacity onPress={()=>{
           this.props.navigator.push({
-            name: 'todoList',
-            component: Todo List
+            name: 'todos List',
+            component: ToDoList
            })
         }}>
           <Text style={styles.textNormal}>{'<'}Forward{'>'} to Todos</Text>

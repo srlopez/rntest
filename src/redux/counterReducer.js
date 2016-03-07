@@ -5,7 +5,7 @@
  */
 
 'use strict';
-import { actionsTypes as aT } from './counterActions'
+import { actionsTypes as types} from './counterActions'
 
 //Redux Initial State
 const initialState = {
@@ -16,8 +16,8 @@ const initialState = {
 const counterReducer = (state = initialState, action = {}) => {
   let delta = 1
   switch (action.type) {
-  case aT.DECREMENT: delta = -1;
-  case aT.INCREMENT:
+  case types.DECREMENT: delta = -1;
+  case types.INCREMENT:
     return Object.assign({}, state, { counter: state.counter+delta })
   default:
     return state

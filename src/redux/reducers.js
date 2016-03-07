@@ -18,12 +18,14 @@ const createStoreWithMiddleware = applyMiddleware(
 
 
 // Reducers
-import todo from './todoReducer'
+import todos from './todosReducer'
 import counter from './counterReducer'
+import data from './dataReducer'
 
 const rootReducer = combineReducers({
-  todo,
-  counter
+  todos,
+  counter,
+  data
 })
 
 export default rootReducer;

@@ -20,7 +20,7 @@ const createStoreWithMiddleware = applyMiddleware(
 // const configureStore = function (initialState: Object = {}): Function {
 //   return createStoreWithMiddleware(rootReducer, initialState);
 // };
-const configureStore = (initialState: Object = {}) => {
+const configureStore = (initialState: Object = {}): Function  => {
   return createStoreWithMiddleware(rootReducer, initialState);
 };
 

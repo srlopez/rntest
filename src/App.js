@@ -18,9 +18,13 @@ import Home from './pages/Home'
 import configureStore from "./redux/store";
 import connectComponent from './AppContainer';
 
-
 //App
 class App extends Component {
+  constructor(props, state){
+    super(props, state);
+    //console.dir(this.props);
+  }
+
   render () {
     return (
         <Navigator style={{flex: 1}}

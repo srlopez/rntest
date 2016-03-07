@@ -21,12 +21,18 @@ export default class extends Component {
 
         <TouchableOpacity onPress={()=>{
           this.props.navigator.push({
-            name: 'Counter2',
+            name: 'Counter II',
             component: Counter2,
             //passProps: {...this.props}
            })
         }}>
           <Text style={styles.textNormal}>{'<'}Forward{'>'} to Counter2</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={()=>{
+          this.props.navigator.pop()
+        }}>
+          <Text style={styles.textNormal}>{'<'}Back{'>'}</Text>
         </TouchableOpacity>
       </View>
     )
