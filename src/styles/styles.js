@@ -17,11 +17,13 @@ const styles = StyleSheet.create({
     backgroundColor: '#F5FCFF',
   },
   title: {
+    fontFamily: 'Avenir',
     fontSize: 40,
     textAlign: 'center',
     margin: 10,
   },
   normal: {
+    fontFamily: 'Helvetica',
     fontSize: 20,
     color: 'dimgrey',
     textAlign: 'center',

@@ -35,7 +35,7 @@ export default class extends Component {
         <Text style={styles.normal}>{isFetching ? "Loading..." : this.props.message}</Text>
         <Text>{"\n\n"}</Text>
 
-        <EasyRow navigator={this.props.navigator} size={20}>
+        <EasyRow navigator={this.props.navigator}>
           <EasyLink label='Counter' name='Counter One' component={Counter1} passProps={{ message: 'Hello World' }}/>
           <EasyLink label='ToDo List' name='ToDo List' component={ToDoList} />
         </EasyRow>

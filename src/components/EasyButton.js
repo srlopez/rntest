@@ -18,7 +18,7 @@ export  class EasyRow extends Component {
 
   static defaultProps = {
     color: 'green',
-    size: 15,
+    size: 20,
   }
 
   render(){
@@ -73,18 +73,18 @@ export  class EasyLink extends Component {
     )
     if (this.props.component == null)
     return (
-      <TouchableOpacity onPress={()=>{ this.props.navigator.pop() }}>
+      <TouchableOpacity
+        onPress={()=>{ this.props.navigator.pop() }}>
         <Text style = {[styles.link, style, this.props.style]}>{label}</Text>
       </TouchableOpacity>
     )
     return(
-      <TouchableOpacity onPress={()=>{
-        this.props.navigator.push({
-          name: this.props.name,
-          component: this.props.component,
-          passProps: this.props.passProps
-         })
-      }}>
+      <TouchableOpacity
+        onPress={()=>{ this.props.navigator.push({
+            name: this.props.name,
+            component: this.props.component,
+            passProps: this.props.passProps
+           })}}>
         <Text style = {[styles.link, style, this.props.style]}>{label}</Text>
       </TouchableOpacity>
     )
@@ -108,10 +108,9 @@ const styles = StyleSheet.create({
     margin: 5,
   },
   link: {
-    borderRadius: 5,
-    fontFamily: 'Helvetica',
+    fontFamily: 'Avenir',
     fontWeight: 'bold',
     color: 'steelblue',
-    margin: 5,
+    margin: 0,
   }
 })

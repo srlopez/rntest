@@ -22,7 +22,7 @@ export default class extends Component {
         state={this.props.counterState}
         actions={this.props.counterActions}/>
 
-        <EasyRow navigator={this.props.navigator} size={20}>
+        <EasyRow navigator={this.props.navigator}>
           <EasyLink label='Back'/>
           <EasyLink label='Counter 2' name='Counter Two' component={Counter2} />
         </EasyRow>

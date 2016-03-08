@@ -42,7 +42,7 @@ export default class extends Component {
                   this.deleteItem(rowID)},
               {text: 'Edit', onPress: () => {
                   this.props.navigator.push({
-                      name: rowData && rowData.txt || 'New Item',
+                      name: rowData && rowData.text || 'New Item',
                       component: ToDoEdit,
                       passProps: { item: rowData, id: rowID }
                       })
@@ -64,8 +64,11 @@ export default class extends Component {
     return (
       <View style={styles.container}>
 
+      <Text style={styles.title}>{this.props.route.name}</Text>
+      <ToDoList {...this.props.todosState} {...this.props.todosActions} onPress={toggleStatus} onLongPress={this.showMenu.bind(this)}/>
 
-      <EasyRow color='darkcyan' size={20}>
+
+      <EasyRow color='darkcyan'>
         <EasyButton label=' - ' onPress={() => {this._minus()}} style={{ backgroundColor: 'sandybrown' }} />
         <EasyButton label={'#'+this.state.idx} style={{ backgroundColor: 'coral' }} />
         <EasyButton label=' + ' onPress={() => {this._plus()}} style={{ backgroundColor: 'sandybrown' }} />
@@ -75,10 +78,10 @@ export default class extends Component {
         <EasyButton label='add' onPress={() => {addToDo( 'Buy '+Math.floor((Math.random() * 100) + 1)+' apples')}} style={{ backgroundColor: 'green' }}/>
       </EasyRow>
 
-      <ToDoList {...this.props.todosState} {...this.props.todosActions} onPress={toggleStatus} onLongPress={this.showMenu.bind(this)}/>
 
-      <EasyRow navigator={this.props.navigator} size={20}>
+      <EasyRow navigator={this.props.navigator} >
         <EasyLink label='Back'/>
+        <EasyLink label='New' name='New' component={ToDoEdit} passPros={{ item: null, id: -1 }} />
       </EasyRow>
     </View>
     )
