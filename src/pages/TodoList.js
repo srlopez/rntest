@@ -15,27 +15,36 @@ import React, {
   Alert
 } from 'react-native';
 
+
+import { EasyRow, EasyButton, EasyLink } from '../components/EasyButton'
 import ToDoEdit from './ToDoEdit'
 
 export default class extends Component {
   constructor(props){
     super(props);
     // console.dir(this.props.todosState);
-    console.dir(this.props.todosActions);
+    // console.dir(this.props.todosActions);
+    this._plus = this._plus.bind(this);
+    this._minus = this._minus.bind(this);
   }
 
+  state = { idx: 0 }
+  _plus() { this.setState( { idx: (this.state.idx+1) % this.props.todosState.todos.length } ) }
+  _minus() { this.setState( { idx: (this.state.idx+1) % this.props.todosState.todos.length } ) }
+
+
   showMenu(rowData, rowID) {
-    console.dir(this.props);
     Alert.alert(
-        'Items Actions', rowData.text,
+        '#'+rowID+'-'+rowData.text,
+        'choose an action',
           [
               {text: 'Delete', onPress: () =>
-                  this.props.todosActions.deleteToDo(rowID)},
+                  this.deleteItem(rowID)},
               {text: 'Edit', onPress: () => {
                   this.props.navigator.push({
                       name: rowData && rowData.txt || 'New Item',
                       component: ToDoEdit,
-                      passProps: {item: rowData, id: rowID}
+                      passProps: { item: rowData, id: rowID }
                       })
                   }},
               {text: 'Cancel'}
@@ -43,40 +52,33 @@ export default class extends Component {
       );
   }
 
+  deleteItem(idx) {
+          this.props.todosActions.deleteToDo(idx)
+      }
 
   render() {
     const { todos, visibilityFilter } = this.props.todosState;
-    const { addToDo, toggleStatus, setVisibilityFilter } = this.props.todosActions;
+    const { addToDo, deleteToDo, toggleStatus, setVisibilityFilter } = this.props.todosActions;
 
 
     return (
       <View style={styles.container}>
       <Text style={styles.textSuper}>TODOLIST</Text>
-      <ToDoList todos={todos} onPress={toggleStatus} onLongPress={this.showMenu}/>
 
-      <TouchableHighlight
-        onPress={() => {
-          toggleStatus(2)
-        }}
-      >
-        <Text>toggle 2</Text>
-      </TouchableHighlight>
+      <EasyRow color='darkcyan' size={20}>
+        <EasyButton label={'#'+this.state.idx} style={{ backgroundColor: 'coral' }} />
+        <EasyButton label='[+]' onPress={() => {this._plus()}} />
+        <EasyButton label='[-]' onPress={() => {this._minus()}} />
+        <EasyButton label='update' onPress={() => {toggleStatus(this.state.idx)}} />
+        <EasyButton label='remove' onPress={() => {deleteToDo(this.state.idx)}} />
+        <EasyButton label='add' onPress={() => {addToDo( 'Buy '+Math.floor((Math.random() * 100) + 1)+' apples')}} style={{ backgroundColor: 'green' }}/>
+      </EasyRow>
 
+      <ToDoList {...this.props.todosState} {...this.props.todosActions} onPress={toggleStatus} onLongPress={this.showMenu.bind(this)}/>
 
-      <TouchableHighlight
-        onPress={() => {
-          addToDo( 'ToDo #'+Math.floor((Math.random() * 100) + 1))
-        }}
-      >
-      <Text>add</Text>
-      </TouchableHighlight>
-
-      <TouchableOpacity onPress={()=>{
-        this.props.navigator.pop()
-      }}>
-        <Text style={styles.textNormal}>{'<'}Back{'>'}</Text>
-      </TouchableOpacity>
-
+      <EasyRow navigator={this.props.navigator}>
+        <EasyLink label='Back'/>
+      </EasyRow>
     </View>
     )
   }
@@ -99,7 +101,7 @@ class ToDoList extends Component {
         <ListView style={{flex:1}}
           dataSource={dataSource}
           renderRow={(rowData, sectionID, rowID) =>
-            <ToDoListItem id={rowID} item={rowData} {...this.props}/>
+            <ToDoListItem rowID={rowID} rowData={rowData} {...this.props}/>
           }
         />
     </View>
@@ -109,17 +111,17 @@ class ToDoList extends Component {
 
 class ToDoListItem extends Component {
   render() {
-    const item = this.props.item;
-    const id = this.props.id;
+    const rowData = this.props.rowData;
+    const rowID = this.props.rowID;
     return (
       <View>
         <TouchableHighlight
-          onPress={() => { this.props.onPress(id) }}
-          onLongPress={() => { this.props.onLongPress(item,id) }}>
+          onPress={() => { this.props.onPress( rowID ) }}
+          onLongPress={() => { this.props.onLongPress( rowData, rowID ) }}>
           <View style={styles.container0}>
             <Text
-              style={[styles.txt, item.completed && styles.completed]}>
-              {id}. {item.text}
+              style={[styles.txt, rowData.completed && styles.completed]}>
+              {rowID}. {rowData.text}
             </Text>
           </View>
         </TouchableHighlight>

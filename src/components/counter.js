@@ -6,6 +6,8 @@ import React, {
   TouchableOpacity
 } from 'react-native';
 
+import { EasyRow, EasyButton, EasyLink } from '../components/EasyButton'
+
 export default class Counter extends Component{
   // shouldComponentUpdate(nextProps, nextState){
   //   console.log(this.props.route.name+' shouldComponentUpdate returns '+ (nextProps.counter !== this.props.counter) +' '+formatTime(new Date()));
@@ -28,12 +30,15 @@ export default class Counter extends Component{
     const increment = this.props.actions.increment;
     const decrement = this.props.actions.decrement;
     return (
-      <View>
+      <View style={{justifyContent: 'center', alignItems: 'center'}}>
         <Text style={{fontSize: 40}}>{this.props.name}</Text>
         <Text style={{fontSize: 100}}>{counter}</Text>
-        <TouchableOpacity onPress={()=>{increment()}} ><Text style={{fontSize: 40}}>{'<'}+{'>'}</Text></TouchableOpacity>
-        <TouchableOpacity onPress={()=>{decrement()}} ><Text style={{fontSize: 40}}>{'<'}-{'>'}</Text></TouchableOpacity>
-        <Text> </Text>
+
+        <EasyRow size={40}>
+          <EasyButton label=' + ' onPress={() => {increment()}} />
+          <EasyButton label=' - ' onPress={() => {decrement()}} />
+        </EasyRow>
+
       </View>
     )
   }

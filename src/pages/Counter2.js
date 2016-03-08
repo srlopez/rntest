@@ -7,6 +7,7 @@ import React, {
   StyleSheet
 } from 'react-native';
 
+import { EasyRow, EasyButton, EasyLink } from '../components/EasyButton'
 import Counter from '../components/counter'
 
 export default class extends Component {
@@ -14,11 +15,9 @@ export default class extends Component {
     return (
       <View style={styles.container}>
         <Counter name={this.props.route.name} state={this.props.counterState} actions={this.props.counterActions}/>
-        <TouchableOpacity onPress={()=>{
-          this.props.navigator.pop()
-        }}>
-          <Text style={styles.textNormal}>{'<'}Back{'>'} to Counter1</Text>
-        </TouchableOpacity>
+        <EasyRow navigator={this.props.navigator}>
+          <EasyLink label='Back'/>
+        </EasyRow>
       </View>
     )
   }

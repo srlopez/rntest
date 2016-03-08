@@ -13,6 +13,7 @@ import React, {
   TouchableOpacity
 } from 'react-native';
 
+import { EasyRow, EasyButton, EasyLink } from '../components/EasyButton'
 import Counter1 from './Counter1'
 import ToDoList from './ToDoList'
 
@@ -33,23 +34,10 @@ export default class extends Component {
         <Text>{isFetching ? "Loading..." : this.props.message}</Text>
         <Text>{"\n\n"}</Text>
 
-        <TouchableOpacity onPress={()=>{
-          this.props.navigator.push({
-            name: 'Counter I',
-            component: Counter1,
-            passProps: { message: 'Hello World' }
-           })
-        }}>
-          <Text style={styles.textNormal}>{'<'}Forward{'>'} to Counter1</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={()=>{
-          this.props.navigator.push({
-            name: 'todos List',
-            component: ToDoList
-           })
-        }}>
-          <Text style={styles.textNormal}>{'<'}Forward{'>'} to Todos</Text>
-        </TouchableOpacity>
+        <EasyRow navigator={this.props.navigator}>
+          <EasyLink label='Counter' name='Counter One' component={Counter1} passProps={{ message: 'Hello World' }}/>
+          <EasyLink label='ToDo List' name='ToDo List' component={ToDoList} />
+        </EasyRow>
       </View>
     );
   }
