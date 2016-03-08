@@ -15,7 +15,7 @@ export default class extends Component {
     return (
       <View style={styles.container}>
         <Counter name={this.props.route.name} state={this.props.counterState} actions={this.props.counterActions}/>
-        <EasyRow navigator={this.props.navigator}>
+        <EasyRow navigator={this.props.navigator} size={20}>
           <EasyLink label='Back'/>
         </EasyRow>
       </View>

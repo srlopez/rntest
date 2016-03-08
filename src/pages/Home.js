@@ -14,6 +14,7 @@ import React, {
 } from 'react-native';
 
 import { EasyRow, EasyButton, EasyLink } from '../components/EasyButton'
+import styles from '../styles/styles'
 import Counter1 from './Counter1'
 import ToDoList from './ToDoList'
 
@@ -27,14 +28,14 @@ export default class extends Component {
 
     return (
       <View style={styles.container}>
-        <Text style={styles.textSuper}>
+        <Text style={styles.title}>
           Home
         </Text>
-        <Text>{isFetching ? "Data" : 'Data loaded'}</Text>
-        <Text>{isFetching ? "Loading..." : this.props.message}</Text>
+        <Text style={styles.normal}>{isFetching ? "Data" : 'Data loaded'}</Text>
+        <Text style={styles.normal}>{isFetching ? "Loading..." : this.props.message}</Text>
         <Text>{"\n\n"}</Text>
 
-        <EasyRow navigator={this.props.navigator}>
+        <EasyRow navigator={this.props.navigator} size={20}>
           <EasyLink label='Counter' name='Counter One' component={Counter1} passProps={{ message: 'Hello World' }}/>
           <EasyLink label='ToDo List' name='ToDo List' component={ToDoList} />
         </EasyRow>
@@ -42,22 +43,3 @@ export default class extends Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  textSuper: {
-    fontSize: 40,
-    textAlign: 'center',
-    margin: 10,
-  },
-  textNormal: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-});

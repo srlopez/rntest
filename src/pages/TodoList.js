@@ -15,7 +15,7 @@ import React, {
   Alert
 } from 'react-native';
 
-
+import styles from '../styles/styles'
 import { EasyRow, EasyButton, EasyLink } from '../components/EasyButton'
 import ToDoEdit from './ToDoEdit'
 
@@ -60,15 +60,16 @@ export default class extends Component {
     const { todos, visibilityFilter } = this.props.todosState;
     const { addToDo, deleteToDo, toggleStatus, setVisibilityFilter } = this.props.todosActions;
 
-
+{/*}<Text style={styles.textSuper}>{this.props.route.name}</Text>{*/}
     return (
       <View style={styles.container}>
-      <Text style={styles.textSuper}>TODOLIST</Text>
+
 
       <EasyRow color='darkcyan' size={20}>
+        <EasyButton label=' - ' onPress={() => {this._minus()}} style={{ backgroundColor: 'sandybrown' }} />
         <EasyButton label={'#'+this.state.idx} style={{ backgroundColor: 'coral' }} />
-        <EasyButton label='[+]' onPress={() => {this._plus()}} />
-        <EasyButton label='[-]' onPress={() => {this._minus()}} />
+        <EasyButton label=' + ' onPress={() => {this._plus()}} style={{ backgroundColor: 'sandybrown' }} />
+
         <EasyButton label='update' onPress={() => {toggleStatus(this.state.idx)}} />
         <EasyButton label='remove' onPress={() => {deleteToDo(this.state.idx)}} />
         <EasyButton label='add' onPress={() => {addToDo( 'Buy '+Math.floor((Math.random() * 100) + 1)+' apples')}} style={{ backgroundColor: 'green' }}/>
@@ -76,7 +77,7 @@ export default class extends Component {
 
       <ToDoList {...this.props.todosState} {...this.props.todosActions} onPress={toggleStatus} onLongPress={this.showMenu.bind(this)}/>
 
-      <EasyRow navigator={this.props.navigator}>
+      <EasyRow navigator={this.props.navigator} size={20}>
         <EasyLink label='Back'/>
       </EasyRow>
     </View>
@@ -97,7 +98,7 @@ class ToDoList extends Component {
   const dataSource = this.ds.cloneWithRows(this.props.todos);
 
   return (
-    <View style={{flex:1}}>
+    <View style={styles.container}>
         <ListView style={{flex:1}}
           dataSource={dataSource}
           renderRow={(rowData, sectionID, rowID) =>
@@ -118,10 +119,10 @@ class ToDoListItem extends Component {
         <TouchableHighlight
           onPress={() => { this.props.onPress( rowID ) }}
           onLongPress={() => { this.props.onLongPress( rowData, rowID ) }}>
-          <View style={styles.container0}>
+          <View>
             <Text
-              style={[styles.txt, rowData.completed && styles.completed]}>
-              {rowID}. {rowData.text}
+              style={[styles.normal, rowData.completed && styles.bold]}>
+              #{rowID}. {rowData.text}
             </Text>
           </View>
         </TouchableHighlight>
@@ -130,78 +131,3 @@ class ToDoListItem extends Component {
     );
   }
 }
-
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  textSuper: {
-    fontSize: 40,
-    textAlign: 'center',
-    margin: 10,
-  },
-  textNormal: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-  container0: {
-    flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'flex-start',
-    padding: 10,
-  },
-  buttonText: {
-      fontSize: 18,
-      color: 'white',
-      alignSelf: 'center'
-  },
-
-  button: {
-      height: 36,
-      backgroundColor: '#48BBEC',
-      alignSelf: 'stretch',
-      justifyContent: 'center'
-  },
-
-  saveButton: {
-      borderColor: '#48BBEC',
-      borderWidth: 1,
-      borderRadius: 8,
-  },
-
-  newButton: {
-      marginBottom: 0,
-      borderRadius: 0,
-  },
-
-  todo: {
-      marginTop: 100,
-      flex: 1,
-      padding: 10,
-  },
-
-  txt: {
-      fontSize: 18,
-      marginLeft: 5,
-      marginTop: 2,
-      color: '#222222',
-  },
-
-  completed: {
-      color: '#cccccc'
-  },
-
-  hr: {
-      backgroundColor: 'rgba(0, 0, 0, 0.4)',
-      height: 1,
-      marginLeft: 0,
-      marginRight: 0,
-  }
-
-});
