@@ -7,6 +7,7 @@ import React, {
   StyleSheet
 } from 'react-native';
 
+import styles from '../styles/styles'
 import { EasyRow, EasyButton, EasyLink } from '../components/EasyButton'
 import Counter from '../components/counter'
 
@@ -22,22 +23,3 @@ export default class extends Component {
     )
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  textSuper: {
-    fontSize: 40,
-    textAlign: 'center',
-    margin: 10,
-  },
-  textNormal: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-});
