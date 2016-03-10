@@ -67,17 +67,28 @@ export  class EasyLink extends Component {
       fontSize: this.props.size,
       color: this.props.active?'black':this.props.color
     }
-    if (this.props.active)
-    return (
-      <Text style = {[styles.link, style, this.props.style]}>{label}</Text>
-    )
-    if (this.props.component == null)
-    return (
-      <TouchableOpacity
-        onPress={()=>{ this.props.navigator.pop() }}>
+    if (this.props.active) {
+      return (
         <Text style = {[styles.link, style, this.props.style]}>{label}</Text>
-      </TouchableOpacity>
-    )
+      )
+    }
+    if (this.props.onPress !== undefined){
+      return (
+        <TouchableOpacity
+          onPress={this.props.onPress}>
+          <Text style = {[styles.link, style, this.props.style]}>{label}</Text>
+        </TouchableOpacity>
+      )
+    }
+    if (this.props.component == null) {
+      return (
+        <TouchableOpacity
+          onPress={()=>{ this.props.navigator.pop() }}>
+          <Text style = {[styles.link, style, this.props.style]}>{label}</Text>
+        </TouchableOpacity>
+      )
+    }
+
     return(
       <TouchableOpacity
         onPress={()=>{ this.props.navigator.push({
