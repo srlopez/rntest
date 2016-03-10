@@ -789,7 +789,7 @@ const store = createStore(todoApp);
 
 This pattern helps to scale Redux development, since different team members can work on different reducers that work with the same actions, without stepping on eachother's toes.
 
-# Reducer Composition with `combineReducers()`
+# 15. Reducer Composition with `combineReducers()`
 [Video Link](https://egghead.io/lessons/javascript-redux-reducer-composition-with-combinereducers)
 
 Since reducer composition is so common in Redux, there's a helper function `combineReducers()`
