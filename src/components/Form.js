@@ -1,7 +1,7 @@
 'use strict';
 import React, {
   Component,
-  View
+  ScrollView
 } from 'react-native';
 
 export default class  extends Component{
@@ -12,23 +12,38 @@ export default class  extends Component{
   static defaultProps = {
   }
 
-  static propTypes: {
-      children: PropTypes.node,
-      values: PropTypes.object,
-      update: PropTypes.func,
-      reset: PropTypes.func,
-      onSubmit: PropTypes.func
+  static propTypes = {
+      children: React.PropTypes.node,
+      values: React.PropTypes.object,
+      update: React.PropTypes.func,
+      reset: React.PropTypes.func,
+      onSubmit: React.PropTypes.func
+    }
+
+  static childContextTypes = {
+    update: React.PropTypes.func,
+    reset: React.PropTypes.func,
+    submit: React.PropTypes.func,
+    values: React.PropTypes.object
+  }
+
+  getChildContext = () => {
+      return {
+        update: this.props.update,
+        reset: this.props.reset,
+        submit: this.submit,
+        values: this.props.values
+      }
     }
 
   render(){
     // var this_props_children_WithProps = React.Children.map(this.props.children, (child) => {
     //   return React.cloneElement(child, { navigator: this.props.navigator, color: this.props.color, size: this.props.size })
     // })
-
     return(
-      <View>
+      <ScrollView>
         {this.props.children}
-      </View>
+      </ScrollView>
     )
   }
 }

@@ -22,6 +22,7 @@ import Form from './TetsForm'
 export default class extends Component {
   componentDidMount() {
     this.props.dataActions.fetchData();
+    this.props.formActions.update('email','mi@email.com')
   }
 
   render() {

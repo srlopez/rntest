@@ -34,6 +34,18 @@ const styles = StyleSheet.create({
     color: 'black',
     fontWeight: 'bold'
   },
+  inputtext:{
+    fontFamily: 'Helvetica',
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: 'black',
+    textAlign: 'center',
+    marginBottom: 5,
+    height: 35,
+    borderColor: 'gray',
+    backgroundColor: 'white',
+    borderWidth: 1
+  }
 });
 
 export default styles

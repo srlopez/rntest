@@ -11,7 +11,9 @@ import { actionsTypes as types } from './formActions'
 
 //Redux Initial State
 let initialState = {
-  values: {}
+  values: {
+    formName: 'myTest'
+  }
 };
 
 function formReducer(state = initialState, action) {
