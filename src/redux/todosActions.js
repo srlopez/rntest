@@ -6,7 +6,8 @@ export const actionsTypes = {
   UPDATE_TODO: 'UPDATE_TODO',
   DELETE_TODO: 'DELETE_TODO',
   TOGGLE_STATUS: 'TOGGLE_STATUS',
-  SET_VISIBILITY_FILTER: 'SET_VISIBILITY_FILTER'
+  SET_VISIBILITY_FILTER: 'SET_VISIBILITY_FILTER',
+  SET_TEXT_FILTER: 'SET_TEXT_FILTER'
 }
 
 /**
@@ -41,6 +42,10 @@ export const actionsCreators = {
   }),
   setVisibilityFilter: (filter) => ({
     type: actionsTypes.SET_VISIBILITY_FILTER,
+    filter
+  }),
+  setTextFilter: (filter) => ({
+    type: actionsTypes.SET_TEXT_FILTER,
     filter
   })
 }

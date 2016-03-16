@@ -9,6 +9,16 @@ import { combineReducers } from 'redux'
 import { actionsTypes as types, VisibilityFilters } from './todosActions'
 const { SHOW_ALL } = VisibilityFilters
 
+function textFilter(state = '', action) {
+  switch (action.type) {
+    case types.SET_TEXT_FILTER:
+      return action.filter
+    default:
+      return state
+  }
+}
+
+
 function visibilityFilter(state = SHOW_ALL, action) {
   switch (action.type) {
     case types.SET_VISIBILITY_FILTER:
@@ -62,6 +72,7 @@ function todos(state = initialState, action) {
 }
 
 const todosReducer = combineReducers({
+  textFilter,
   visibilityFilter,
   todos
 })

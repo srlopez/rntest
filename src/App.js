@@ -13,7 +13,7 @@ import React, {
 } from 'react-native';
 import { Provider } from "react-redux";
 
-import Home from './pages/Home'
+import Home from './pages/Home'  // './pages' <-index.js
 
 import configureStore from "./redux/store";
 import connectComponent from './AppContainer';

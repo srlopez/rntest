@@ -13,7 +13,7 @@ const initialState = {
   message: ""
 }
 
-const data = ( state = initialState, action ) => {
+const dataReducer = ( state = initialState, action ) => {
   switch (action.type) {
   case types.REQUEST_DATA:
     return Object.assign({}, state, {
@@ -30,4 +30,4 @@ const data = ( state = initialState, action ) => {
 };
 
 
-export default data;
+export default dataReducer;

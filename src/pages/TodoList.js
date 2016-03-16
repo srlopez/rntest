@@ -12,7 +12,8 @@ import React, {
   Text, TouchableOpacity,
   TouchableHighlight,
   StyleSheet,
-  Alert
+  Alert,
+  TextInput
 } from 'react-native';
 
 import styles from '../styles/styles'
@@ -27,7 +28,9 @@ export default class extends Component {
   }
 
   // this.ds
-  ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+  ds = new ListView.DataSource({
+    rowHasChanged: (r1, r2) => r1 !== r2,
+  });
   // this.state only for visual
   state = { idx: 0 }
   _plus = () => { this.setState( { idx: (this.state.idx+1) % this.props.todosState.todos.length } ) }
@@ -54,23 +57,36 @@ export default class extends Component {
       );
   }
 
+  applyFilter = ( list, filter, text ) => {
+    switch( filter ) {
+      case VisibilityFilters.SHOW_ACTIVE:
+        return list.filter( elem => elem.completed == true );
+      case VisibilityFilters.SHOW_COMPLETED:
+        return list.filter( elem => elem.completed == false );
+      default:
+        return list.filter( elem => elem.text.toLowerCase().indexOf(text.toLowerCase()) > -1 )
+    }
+
+  }
+
   render() {
-    const { todos, visibilityFilter } = this.props.todosState;
-    const { addToDo, deleteToDo, toggleStatus, setVisibilityFilter } = this.props.todosActions;
+    const { todos, visibilityFilter, textFilter } = this.props.todosState;
+    const { addToDo, deleteToDo, toggleStatus, setVisibilityFilter, setTextFilter } = this.props.todosActions;
+    const dataSource = this.ds.cloneWithRows( this.applyFilter( todos, visibilityFilter, textFilter ))
 
     return (
       <View style={styles.container}>
         <Text style={styles.title}>{this.props.route.name}</Text>
 
         <ListView style={{flex:1}}
-          dataSource = { this.ds.cloneWithRows(todos) }
-          renderRow  = { (rowData, sectionID, rowID) =>
+          dataSource = { dataSource }
+          renderRow  = { (rowData, sectionID, rowID, highlightRow) =>
             <ToDoListItem
-               rowID   = { rowID }
-               rowData = { rowData }
-               onPress = { () => toggleStatus(parseInt(rowID)) }
-               onLongPress={() => this.showMenu(parseInt(rowID), rowData)}
-               />
+              rowID   = { rowID }
+              rowData = { rowData }
+              onPress = { () => toggleStatus(parseInt(rowID)) }
+              onLongPress={() => this.showMenu(parseInt(rowID), rowData)}
+              />
           }
         />
 
@@ -78,8 +94,16 @@ export default class extends Component {
           <EasyLink label='All' onPress={()=>setVisibilityFilter(VisibilityFilters.SHOW_ALL)}/>
           <EasyLink label='On' onPress={()=>setVisibilityFilter(VisibilityFilters.SHOW_COMPLETED)}/>
           <EasyLink label='Off' onPress={()=>setVisibilityFilter(VisibilityFilters.SHOW_ACTIVE)}/>
-        </EasyRow>
 
+        </EasyRow>
+        <TextInput
+          style = { styles.normal, {  height: 30, borderColor: 'gray', borderWidth: 1, margin: 5 }}
+          onChangeText={(text) => setTextFilter(text)}
+          placeholder = ' filtra me'
+          autoCapitalize = 'none'
+          autoCorrect
+          keyboardType = 'web-search'
+          />
         <EasyRow color='darkcyan'>
           <EasyButton label=' - ' onPress={() => {this._minus()}} style={{ backgroundColor: 'sandybrown' }} />
           <EasyButton label={'#'+this.state.idx} style={{ backgroundColor: 'coral' }} />
@@ -108,6 +132,7 @@ class ToDoListItem extends Component {
   render() {
     const rowData = this.props.rowData;
     const rowID = this.props.rowID;
+
     return (
       <View>
         <TouchableHighlight
