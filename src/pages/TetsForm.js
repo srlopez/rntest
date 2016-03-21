@@ -18,7 +18,7 @@ export default class extends Component {
     // But this way the action is dispatched but the stete recived remains unchanged
     this.props.formActions.update('name','required value')
     // This way the actions is dispatched and re-render the component
-    setTimeout(() => { this.props.formActions.update('url','https://mi/url/de_prueba') }, 0);
+    //setTimeout(() => { this.props.formActions.update('url','https://mi/url/de_prueba') }, 0);
   }
 
   render() {
@@ -34,11 +34,11 @@ export default class extends Component {
                 label='Name' placeholder='Name'/>
           <FTextInput name='url'
                 validate={['url']}
-                label='URL del sitio'
+                label='Site URL'
                 placeholder='url'/>
           <FTextInput name='email'
                 validate={['email','required']}
-                label='email de contacto' placeholder='email'/>
+                label='Contact email' placeholder='email'/>
 
           <FSubmitButton/>
         </Form>

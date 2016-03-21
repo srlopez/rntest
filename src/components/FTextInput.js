@@ -88,6 +88,7 @@ export default class  extends Component{
 
       <View>
 
+      <Text style={styles.normal}>{this.props.label}</Text>
       <TextInput
         style = {[styles.inputtext, {width:200}]}
         autoCorrect = {false}
@@ -99,7 +100,6 @@ export default class  extends Component{
         placeholder = {this.props.placeholder}
         defaultValue = {this.context.values[this.props.name]}
       />
-      <Text style={styles.normal}>{this.props.label}</Text>
       {
         this.state.errors.map((text,i) => <Text key={i}>{text}</Text>)
       }

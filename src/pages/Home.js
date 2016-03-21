@@ -38,9 +38,9 @@ export default class extends Component {
         <Text>{"\n\n"}</Text>
 
         <EasyRow navigator={this.props.navigator}>
-          <EasyLink label='Counter' name='Counter One' component={Counter1} passProps={{ message: 'Hello World' }}/>
-          <EasyLink label='ToDo List' name='ToDo List' component={ToDoList} />
-          <EasyLink label='Form' name='Form' component={Form} />
+          {/*<EasyLink label='Counter' name='Counter One' component={Counter1} passProps={{ message: 'Hello World' }}/>
+          <EasyLink label='ToDo List' name='ToDo List' component={ToDoList} />*/}
+          <EasyLink label='Goto Form' name='Form' component={Form} />
         </EasyRow>
       </View>
     );
