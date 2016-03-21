@@ -16,7 +16,7 @@ export default class extends Component {
   componentWillMount(){
     // This is binded to dispatch(...)
     // But this way the action is dispatched but the stete recived remains unchanged
-    this.props.formActions.update('name','required value')
+    this.props.formActions.update('name','TEST NAME')
     // This way the actions is dispatched and re-render the component
     //setTimeout(() => { this.props.formActions.update('url','https://mi/url/de_prueba') }, 0);
   }
